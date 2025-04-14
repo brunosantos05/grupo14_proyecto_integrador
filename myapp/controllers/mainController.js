@@ -1,5 +1,5 @@
 const camisetas =require("../db")
-const { index } = require("./mercadoControllers")
+
 
 const mainController = {
 

@@ -1,26 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const controlador = require('../controllers/mercadoControllers');
+const mainController = require('../controllers/mainController');
 
-// Página principal
-router.get('/', controlador.index);
+router.get(`/`, mainController.index)
 
-// Registro
-router.get('/register', controlador.registro);
+router.get(`/index`, mainController.index)
 
-// Login
-router.get('/login', controlador.login);
+router.get(`/search`, mainController.search)
 
-// Perfil del usuario
-router.get('/profile', controlador.perfil);
-
-// Agregar producto
-router.get('/product-add', controlador.productoAgregar);
-
-// Detalle del producto
-router.get('/product', controlador.productoDetalle);
-
-// Resultados de búsqueda
-router.get('/search-results', controlador.resultadosBusqueda);
-
-module.exports = router;
+module.exports=router

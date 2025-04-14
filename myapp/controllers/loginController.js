@@ -1,4 +1,3 @@
-const { login } = require("./mercadoControllers");
 
 const loginController = {
 

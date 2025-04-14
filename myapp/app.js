@@ -9,8 +9,8 @@ var rutaLogin= require(`./routes/login`)
 var rutaregistro= require(`./routes/register`)
 var rutaProducto= require(`./routes/product`)
 var rutaPerfil=require(`./require/profile`)
-var rutaAgregarproductos= (`./require/productAdd`)
-var rutaBuscar= (`./require/search`)
+var rutaAgregarproductos= require(`./require/productAdd`)
+var rutaBuscar= require(`./require/search`)
 
 
 var app = express();
