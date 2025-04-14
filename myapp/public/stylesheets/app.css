@@ -4,7 +4,7 @@
 
 /*====== Variables ======*/
 :root {
-  --yellow: #EAC926;
+  --yellow: #F39c12;
   --dark-blue: #03264C;
   --light-blue: #1259c3;
   --gray: #666666;
@@ -74,6 +74,7 @@ hr {
 .main-header_home-link,
 .main-header_credit-link {
   display: block;
+  
 }
 
 .main-header_credit-link {
