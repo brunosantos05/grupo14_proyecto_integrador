@@ -1,10 +1,10 @@
-const express=require(`express`)
-const camisetas=require(`../db`)
+const products = require('../db/products');
 
-const productAddController = { 
-    product:function(req,res){
-        res.render(`product`)
-    },
-}
+const productoController = {
+  detalle: function (req,res) {
+    let producto = products.producto[0];
+    res.render('producto', {producto});
+  }
+};
 
-module.exports= productController;
+module.exports = productoController;

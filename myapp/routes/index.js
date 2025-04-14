@@ -1,11 +1,12 @@
-const express = require('express');
-const router = express.Router();
+var express = require('express');
+var router = express.Router();
+
 const mainController = require('../controllers/mainController');
+const busquedaController = require('../controllers/busquedaControllers');
+const productController = require('../controllers/productController');
 
-router.get(`/`, mainController.index)
+router.get('/', mainController.index);
+router.get('/search', busquedaController.busqueda);
+router.get('/products/:id', productController.detalle);
 
-router.get(`/index`, mainController.index)
-
-router.get(`/search`, mainController.search)
-
-module.exports=router
+module.exports = router;

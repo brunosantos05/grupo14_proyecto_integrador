@@ -1,12 +1,4 @@
 const camisetas = {
-  usuario: {
-    email: "cr7fan@football.com",
-    usuario: "CristianoFan",
-    contraseña: "contraseña123",
-    fechaNacimiento: "1990-06-15",
-    nroDocumento: 12345678,
-    fotoDePerfil: "images/users/CristianoFan.jpg"
-  },
   productos: [
     {
       id: 1,

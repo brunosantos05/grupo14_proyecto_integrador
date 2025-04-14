@@ -1,15 +1,10 @@
-const camisetas =require("../db")
-
+const listaProductos = require('../db/products');
 
 const mainController = {
+  index: function (req, res) {
+      let productos= listaProductos.producto;
+      res.render("index", {productos})
+  }
+};
 
-    index: function(req, res){
-        console.log(`prueba`)
-        res.render(`index`, {title:`ML`})
-    },
-    search: function(req,res){
-        const search=req.params.search
-        res.render(`search-results`,{search})
-    }
-}
-module.exports= mainController;
+module.exports = mainController;
