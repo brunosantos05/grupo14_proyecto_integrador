@@ -2,12 +2,12 @@ const camisetas = {
   productos: [
     {
       id: 1,
-      imagen: "images/camiseta_barcelona.jpg",
-      nombre: "Camiseta FC Barcelona 2021/22",
-      descripcion: "La pasión culé se plasma en cada detalle.",
+      imagen: "Boca.jpg",
+      nombre: "Camiseta de Boca",
+      descripcion: "La pasión xeneize se plasma en cada detalle.",
       comentarios: [
         {
-          nombreUsuario: "BarcaLover",
+          nombreUsuario: "BocaLover",
           texto: "Una prenda que respira historia y emoción.",
           imagenDePerfil: "images/perfil_barcalover.jpg"
         }
@@ -15,53 +15,53 @@ const camisetas = {
     },
     {
       id: 2,
-      imagen: "images/camiseta_real_madrid.jpg",
+      imagen: "celtic.jpg",
       nombre: "Camiseta Real Madrid 2021/22",
       descripcion: "Elegancia y fuerza, la camiseta blanca por excelencia.",
       comentarios: [
         {
           nombreUsuario: "MerengueFan",
           texto: "Sencilla pero icónica, demuestra grandeza en cada costura.",
-          imagenDePerfil: "images/perfil_merenguefan.jpg"
+          imagenDePerfil: "city.jpg"
         }
       ]
     },
     {
       id: 3,
-      imagen: "images/camiseta_liverpool.jpg",
+      imagen: "city.jpg",
       nombre: "Camiseta Liverpool 2021/22",
       descripcion: "Roja pasión que enciende el ánimo de cada hincha.",
       comentarios: [
         {
           nombreUsuario: "KopKing",
           texto: "Diseño que inspira a luchar hasta el último minuto.",
-          imagenDePerfil: "images/perfil_kopking.jpg"
+          imagenDePerfil: "independiente.jpg"
         }
       ]
     },
     {
       id: 4,
-      imagen: "images/camiseta_manu.jpg",
+      imagen: "/images/products/Boca.jpg",
       nombre: "Camiseta Manchester United 2021/22",
       descripcion: "El espíritu del Rojo, tradición y modernidad en una misma prenda.",
       comentarios: [
         {
           nombreUsuario: "RedDevil",
           texto: "Clásica y potente, siempre una apuesta segura.",
-          imagenDePerfil: "images/perfil_redevil.jpg"
+          imagenDePerfil: "liverpool.jpg"
         }
       ]
     },
     {
       id: 5,
-      imagen: "images/camiseta_juventus.jpg",
+      imagen: "milan.jpg",
       nombre: "Camiseta Juventus 2021/22",
       descripcion: "El rigor italiano en cada puntada, símbolo de excelencia.",
       comentarios: [
         {
           nombreUsuario: "Bianconeri",
           texto: "Una camiseta que marca historia, orgullo italiano.",
-          imagenDePerfil: "images/perfil_bianconeri.jpg"
+          imagenDePerfil: "napoli.jpg"
         }
       ]
     },
@@ -74,7 +74,7 @@ const camisetas = {
         {
           nombreUsuario: "BayernFan",
           texto: "Sólida, con un diseño que transmite tradición ganadora.",
-          imagenDePerfil: "images/perfil_bayernfan.jpg"
+          imagenDePerfil: "united.jpeg"
         }
       ]
     },
@@ -87,26 +87,26 @@ const camisetas = {
         {
           nombreUsuario: "PSGForever",
           texto: "Moderna y vibrante, captura la esencia del estilo francés.",
-          imagenDePerfil: "images/perfil_psgforever.jpg"
+          imagenDePerfil: "city.jpg"
         }
       ]
     },
     {
       id: 8,
-      imagen: "images/camiseta_lazio.jpg",
+      imagen: "racing.webp",
       nombre: "Camiseta Lazio 2021/22",
       descripcion: "El orgullo romano, con un diseño clásico y renovado.",
       comentarios: [
         {
           nombreUsuario: "Aquilotti",
           texto: "Pasión y tradición se unen en esta camiseta única.",
-          imagenDePerfil: "images/perfil_aquilotti.jpg"
+          imagenDePerfil: "psg.jpg"
         }
       ]
     },
     {
       id: 9,
-      imagen: "images/camiseta_atletico.jpg",
+      imagen: "real.jpg",
       nombre: "Camiseta Atlético de Madrid 2021/22",
       descripcion: "Garra y determinación en cada fibra del tejido.",
       comentarios: [
@@ -119,14 +119,14 @@ const camisetas = {
     },
     {
       id: 10,
-      imagen: "images/camiseta_inter.jpg",
+      imagen: "real.jpg",
       nombre: "Camiseta Inter de Milan 2021/22",
       descripcion: "El equilibrio perfecto entre tradición y modernidad, una pieza icónica.",
       comentarios: [
         {
           nombreUsuario: "Nerazzurri",
           texto: "Una camiseta que rezuma orgullo y legado milanés.",
-          imagenDePerfil: "images/perfil_nerazzurri.jpg"
+          imagenDePerfil: "tachira.jpeg"
         }
       ]
     }
