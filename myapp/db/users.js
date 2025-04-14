@@ -1,11 +1,12 @@
 const users = {
     usuario: {
-        email: "liomessi@gmai.com",
+        id: 1,
+        email: "vallejovalentin@gmail.com",
         usuario: "valenvallejo_",
         contrasenia: "vallejito",
         fechaNacimiento: "19-08-2005",
         numeroDocumento: "46872439",
-        fotoPerfil: '/Users/valentinvallejo/Desktop/grupo14_proyecto_integrador/myapp/public/images/users/Vallejo.jpg'
+        fotoPerfil: "Vallejo.jpg"
     }
 };
 

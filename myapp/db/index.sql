@@ -1,18 +1,18 @@
+-- Crear base de datos
 CREATE SCHEMA proyecto_integrador;
 
+-- Usar base de datos
 USE proyecto_integrador;
 
 -- Tabla de usuarios
 CREATE TABLE usuarios (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   email VARCHAR(255) NOT NULL,
-  contrasena VARCHAR(255) NOT NULL,
-  fecha_nacimiento DATE NOT NULL,
-  nro_documento BIGINT NOT NULL,
-  foto_perfil VARCHAR(255),
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP
+  usuario VARCHAR(255) NOT NULL,
+  contrasenia VARCHAR(255) NOT NULL,
+  fechaNacimiento DATE NOT NULL,
+  numeroDocumento BIGINT NOT NULL,
+  fotoPerfil VARCHAR(255)
 );
 
 -- Tabla de productos
@@ -20,23 +20,19 @@ CREATE TABLE productos (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   usuario_id INT UNSIGNED NOT NULL,
   imagen VARCHAR(255) NOT NULL,
-  nombre_producto VARCHAR(255) NOT NULL,
+  nombre VARCHAR(255) NOT NULL,
   descripcion TEXT NOT NULL,
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
--- Tabla de comentarios
+-- Tabla de comentarios 
 CREATE TABLE comentarios (
   id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   producto_id INT UNSIGNED NOT NULL,
   usuario_id INT UNSIGNED NOT NULL,
+  nombreUsuario VARCHAR(255) NOT NULL,
   texto TEXT NOT NULL,
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  deletedAt TIMESTAMP NULL ON UPDATE CURRENT_TIMESTAMP,
+  imagenDePerfil VARCHAR(255),
   FOREIGN KEY (producto_id) REFERENCES productos(id),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );

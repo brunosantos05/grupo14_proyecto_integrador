@@ -9,9 +9,9 @@ const userController = {
     res.render('login');
   },
   profile: function(req, res) {
-    let nombreUsuario = users.usuario; 
-    let productos = products.producto;
-    res.render('perfil', { user: nombreUsuario, productos: productos});
+    let usuario = users.usuario; 
+    let productos = products.productos;
+    return res.render('profile', { user:usuario, productos: productos});
   }
 };
 
