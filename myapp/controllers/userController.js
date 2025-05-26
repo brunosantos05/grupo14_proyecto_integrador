@@ -32,7 +32,12 @@ const userController = {
     let usuario = users.usuario; 
     let productos = products.productos;
     return res.render('profile', { user:usuario, productos: productos});
-  }
+  },
+  logout: function(req, res) {
+    req.session.destroy();
+    res.redirect('/');
+}
+
 };
 
 module.exports = userController;

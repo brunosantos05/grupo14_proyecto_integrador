@@ -8,6 +8,7 @@ const mainRoutes = require('./routes/index');
 const productsRoutes = require('./routes/productRoutes')
 const userRoutes = require('./routes/userRoutes');
 
+const session= require("express-session")
 
 var app = express();
 
@@ -20,6 +21,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  secret: "Nuestro mensaje secreto",
+  resave: false,
+  saveUninitialized: true
+}));
 
 app.use('/', mainRoutes);
 app.use('/users', userRoutes);
