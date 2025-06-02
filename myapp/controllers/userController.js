@@ -1,3 +1,4 @@
+const { Association } = require('sequelize');
 const db = require('../database/models');
 const bcryptjs = require("bcryptjs");
 
@@ -68,24 +69,30 @@ const userController = {
   },
 
   profile: function(req, res) {
-    const usuario = req.session.userLogged;
-    if (!usuario) return res.redirect('/');
+    id = req.params.id
 
-    db.User.findByPk(usuario.id, {
-      include: [{
-        model: db.Producto,
-        as: 'productos',
-        include: [{ model: db.Comentario, as: 'comentarios' }]
-      }]
+    db.User.findByPk(id, {
+      include: [
+        {
+        association: "productos"
+        }
+      ]
+
     })
-    .then(usuarioCompleto => {
-      res.render('profile', {
-        user: usuario,
-        productos: usuarioCompleto.productos,
-        totalProductos: usuarioCompleto.productos.length
-      });
-    })
-    .catch(error => res.send("Error al cargar productos del usuario: " + error));
+    .then(function (data) {
+        db.Producto.findAll({
+          where: { usuario_id: data.id},
+          include: [
+            { association: "comentarios"}
+        ]
+        })
+        .then(producto => {
+          return res.render ("profile", { user: data, productos: producto})
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
 
   logout: function(req, res) {

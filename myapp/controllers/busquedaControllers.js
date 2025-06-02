@@ -1,11 +1,33 @@
-const camisetas = require('../db/products');
+const { Association, where } = require("sequelize");
+const db = require('../database/models');
+const Op = db.Sequelize.Op;
+const Product = db.Product;
 
-const busquedaControllers =  {
-  busqueda: function(req, res) {
-    const requerimiento = req.query.search;
-    const productos = camisetas.productos
-    res.render('search-results', {productos:productos});
-  }
-};
+const busquedaControllers = {
+  busqueda: function (req, res) {
+    let buscado = req.query.search;
+
+    db.Producto.findAll({
+      where: {
+        [Op.or]: [
+          { nombre: { [Op.like]: "%" + buscado + "%" } },
+          { descripcion: { [Op.like]: "%" + buscado + "%" } }
+        ]
+      },
+      include: [
+        { association: "user" },
+        { association: "comentarios" }
+      ]
+    })
+      .then((data) => {
+        return res.render("search-results", { productos: data });
+      })
+
+      .catch(function (e) {
+        console.log(e);
+  });
+},
+}
+
 
 module.exports = busquedaControllers;
