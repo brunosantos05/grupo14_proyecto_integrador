@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   let alias = "Producto";
 
   let cols = {
@@ -7,29 +7,21 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    usuario_id: {
-      type: DataTypes.INTEGER
-    },
-    imagen: {
-      type: DataTypes.STRING
-    },
-    nombre: {
-      type: DataTypes.STRING
-    },
-    descripcion: {
-      type: DataTypes.TEXT    // Cambié a TEXT porque es el tipo real en la DB
-    }
+    nombre: DataTypes.STRING,
+    descripcion: DataTypes.STRING,
+    imagen: DataTypes.STRING,
+    usuario_id: DataTypes.INTEGER,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   };
 
   let config = {
-    tableName: "productos",
-    timestamps: false,
-    underscored: true       // Correcto porque usas snake_case en la tabla
+    tableName: "productos"
   };
 
-  let Producto = sequelize.define(alias, cols, config);
+  const Producto = sequelize.define(alias, cols, config);
 
-  Producto.associate = function (models) {
+  Producto.associate = function(models) {
     Producto.belongsTo(models.User, {
       foreignKey: "usuario_id",
       as: "user"
