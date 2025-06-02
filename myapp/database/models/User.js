@@ -7,33 +7,18 @@ module.exports = function (sequelize, DataTypes) {
             primaryKey: true,
             type: DataTypes.INTEGER
         },
-        email: {
-            type: DataTypes.STRING
-        },
-        usuario: {
-            type: DataTypes.STRING
-        },
-        contrasenia: {
-            type: DataTypes.STRING
-        },
-        fechaNacimiento: {
-            type: DataTypes.DATE
-        },
-        numeroDocumento: {
-            type: DataTypes.BIGINT
-        },
-        fotoPerfil: {
-            type: DataTypes.STRING
-        },
-        createdAt: {
-            type: DataTypes.DATE
-        }
+        email: DataTypes.STRING,
+        usuario: DataTypes.STRING,
+        contrasenia: DataTypes.STRING,
+        fechaNacimiento: DataTypes.DATE,
+        numeroDocumento: DataTypes.BIGINT,
+        fotoPerfil: DataTypes.STRING,
+        createdAt: DataTypes.DATE
     };
 
     let config = {
         tableName: "usuarios", 
-        timestamps: false,
-       
+        timestamps: false
     };
 
     const User = sequelize.define(alias, cols, config);
@@ -42,6 +27,11 @@ module.exports = function (sequelize, DataTypes) {
         User.hasMany(models.Producto, {
             foreignKey: "usuario_id", 
             as: "productos"
+        });
+
+        User.hasMany(models.Comentario, {
+            foreignKey: "usuario_id",
+            as: "comentarios"
         });
     };
 

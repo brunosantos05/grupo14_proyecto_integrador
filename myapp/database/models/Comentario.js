@@ -2,32 +2,32 @@ module.exports = function (sequelize, dataTypes) {
     let alias = "Comentario";
 
     let cols = {
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: dataTypes.INTEGER
-        },
-        producto_id: {
-            type: dataTypes.INTEGER
-        },
-        usuario_id: {
-            type: dataTypes.INTEGER
-        },
-        nombreUsuario: {
-            type: dataTypes.STRING
-        },
-        texto: {
-            type: dataTypes.TEXT
-        },
-        imagenDePerfil: {
-            type: dataTypes.STRING
-        }
+      id: {
+        autoIncrement: true,
+        primaryKey: true,
+        type: dataTypes.INTEGER
+      },
+      producto_id: {
+        type: dataTypes.INTEGER
+      },
+      usuario_id: {
+        type: dataTypes.INTEGER
+      },
+      nombreUsuario: {  
+        type: dataTypes.STRING
+      },
+      texto: {
+        type: dataTypes.TEXT
+      },
+      imagenDePerfil: {  
+        type: dataTypes.STRING
+      }
     };
 
     let config = {
         tableName: "comentarios",
         timestamps: false,
-        underscored: true
+        underscored: false
     };
 
     let Comentario = sequelize.define(alias, cols, config);

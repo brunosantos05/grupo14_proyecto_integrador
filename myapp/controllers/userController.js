@@ -91,14 +91,20 @@ const userController = {
     return res.redirect('/');
   }
 
-  db.Producto.findAll()
-    .then(function(productos) {
-      res.render('profile', { user: usuario, productos: productos });
-    })
-    .catch(function(error) {
-      res.send("Error al cargar productos: " + error);
-    });
-},
+  db.Producto.findAll({
+  include: [{
+    model: db.Comentario,
+    as: 'comentarios',
+    attributes: ['id', 'nombreUsuario', 'texto', 'imagenDePerfil']  // datos de la DB
+  }]
+})
+.then(function(productos) {
+  res.render('profile', { user: req.session.userLogged, productos });
+})
+.catch(function(error) {
+  res.send("Error al cargar productos: " + error);
+});
+  },
 
 
   logout: function(req, res) {
