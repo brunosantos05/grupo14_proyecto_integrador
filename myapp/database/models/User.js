@@ -1,46 +1,49 @@
-module.exports = function (sequelize, dataTypes){
-    let alias = "User"
+module.exports = function (sequelize, DataTypes) {
+    let alias = "User";
+
     let cols = {
-        id:{
-            autoIncrement : true,
-            primaryKey : true,
-            type: dataTypes.INTEGER
+        id: {
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
         },
         email: {
-            type : dataTypes.STRING
+            type: DataTypes.STRING
         },
         usuario: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING
         },
         contrasenia: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING
         },
         fechaNacimiento: {
-            type: dataTypes.DATE,
+            type: DataTypes.DATE
         },
         numeroDocumento: {
-            type: dataTypes.BIGINT
+            type: DataTypes.BIGINT
         },
         fotoPerfil: {
-            type: dataTypes.STRING
+            type: DataTypes.STRING
         },
-    }
+        createdAt: {
+            type: DataTypes.DATE
+        }
+    };
 
     let config = {
-        tableName : "usuarios",
-        timestamps : false,
-        underscored: true
-    }
+        tableName: "usuarios", 
+        timestamps: false,
+       
+    };
 
-   let Usuario = sequelize.define(alias, cols, config);
+    const User = sequelize.define(alias, cols, config);
 
-Usuario.associate = function (models) {
-    Usuario.hasMany(models.Producto, {
-        foreignKey: "producto_id",
-        as: "productos"
+    User.associate = function (models) {
+        User.hasMany(models.Producto, {
+            foreignKey: "usuario_id", 
+            as: "productos"
         });
     };
 
-    return Usuario;
-
+    return User;
 };

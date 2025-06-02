@@ -4,7 +4,7 @@ const bcryptjs = require("bcryptjs");
 const userController = {
   register: function(req, res) {
     if (req.session && req.session.userLogged) {
-      return res.redirect('/profile'); // Redirección si ya está logueado
+      return res.redirect('/users/profile'); // Redirige si ya está logueado
     }
     res.render('register');
   },
@@ -17,46 +17,85 @@ const userController = {
     const documento = req.body.documento;
     const foto = req.body.foto;
 
-    // Validaciones
     if (!email || !username || !password || password.length < 3) {
       return res.send("Error: todos los campos son obligatorios y la contraseña debe tener al menos 3 caracteres.");
     }
 
-    // verificamos si ya existe un usuario con ese email
     db.User.findOne({ where: { email: email } })
       .then(function(user) {
         if (user) {
           return res.send("Error: ese email ya está registrado.");
         }
 
-        // Crear el usuario
         return db.User.create({
-          name: username,
+          usuario: username,
           email: email,
-          password: bcryptjs.hashSync(password, 10),
-          birthdate: fechaNacimiento,
-          document: documento,
-          foto: foto,
-          createdAt: new Date()
+          contrasenia: bcryptjs.hashSync(password, 10),
+          fechaNacimiento: fechaNacimiento,
+          numeroDocumento: documento,
+          fotoPerfil: foto,
         });
       })
       .then(function(usuarioCreado) {
-        return res.redirect('/login');
+        return res.redirect('/users/login');
       })
       .catch(function(error) {
         return res.send("Ocurrió un error al registrar el usuario: " + error);
       });
   },
 
-  login: function(req, res) {
-    res.render('login');
+  login: function (req, res) {
+    if (req.session && req.session.userLogged) {
+      return res.redirect('/users/profile');
+    }
+    res.render('login', { errors: [] });
+  },
+
+  loginProcess: function (req, res) {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    db.User.findOne({ where: { email: email } })
+      .then(function (user) {
+        if (!user) {
+          return res.render('login', { errors: ['El email no está registrado.'] });
+        }
+
+        if (!bcryptjs.compareSync(password, user.contrasenia)) {
+          return res.render('login', { errors: ['Contraseña incorrecta.'] });
+        }
+
+        // Guardamos datos útiles en sesión (evitamos guardar todo el objeto user)
+        req.session.userLogged = {
+          id: user.id,
+          usuario: user.usuario,
+          email: user.email,
+          fotoPerfil: user.fotoPerfil,
+        };
+
+        if (req.body.recordame) {
+          res.cookie('userEmail', email, { maxAge: 60000 * 10 });
+        }
+
+        return res.redirect('/users/profile');
+      })
+      .catch(function (error) {
+        res.send('Ocurrió un error al iniciar sesión: ' + error);
+      });
   },
 
   profile: function(req, res) {
-    const usuario = req.session.userLogged; 
-    db.Product.findAll()
+    const usuario = req.session.userLogged;
+    if (!usuario) {
+      return res.redirect('/users/login');
+    }
+
+    db.Producto.findAll()  // Asegúrate que el modelo correcto es Producto, no Product
       .then(function(productos) {
         res.render('profile', { user: usuario, productos: productos });
+      })
+      .catch(function(error) {
+        res.send("Error al cargar productos: " + error);
       });
   },
 

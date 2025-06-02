@@ -1,56 +1,63 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/userRoutes'); // ← nombre corregido
-var mercadoLibreRouter = require('./routes/productRoutes'); // ← nombre corregido
 const db = require("./database/models");
 
-var app = express();
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/userRoutes');
+const mercadoLibreRouter = require('./routes/productRoutes');
 
-// view engine setup
+const app = express();
+
+// Configuración del motor de vistas
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Middlewares de configuración
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Middleware de sesión
 app.use(session({
   secret: "mensaje secreto",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
-// Middleware para pasar el usuario a las vistas si está en sesión
+// Middleware global para mantener sesión desde cookie y pasar userLogged a views
 app.use(function (req, res, next) {
-  if (req.session.user != undefined) {
-    res.locals.user = req.session.user;
+  if (req.session.userLogged) {
+    res.locals.userLogged = req.session.userLogged;
+    return next();
   }
-  return next();
-});
 
-// Middleware para mantener la sesión si hay una cookie
-app.use(function (req, res, next) {
-  if (req.cookies.userId != undefined && req.session.user == undefined) {
-    let idDeLaCookie = req.cookies.userId;
-    db.User.findByPk(idDeLaCookie)
-      .then(function (user) {
-        req.session.user = user;
-        res.locals.user = user;
+  if (req.cookies.userEmail) {
+    db.User.findOne({ where: { email: req.cookies.userEmail } })
+      .then(function(user) {
+        if (user) {
+          req.session.userLogged = {
+            id: user.id,
+            usuario: user.usuario,
+            email: user.email,
+            fotoPerfil: user.fotoPerfil,
+          };
+          res.locals.userLogged = req.session.userLogged;
+        }
         return next();
       })
-      .catch(function (err) {
-        console.log("error en cookies", err);
+      .catch(function(err) {
+        console.error("Error al recuperar usuario desde cookie:", err);
         return next();
       });
   } else {
+    res.locals.userLogged = null;
     return next();
   }
 });
@@ -58,9 +65,9 @@ app.use(function (req, res, next) {
 // Rutas
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/bears', mercadoLibreRouter);
+app.use('/products', mercadoLibreRouter);
 
-// Catch 404 and forward to error handler
+// Catch 404
 app.use(function(req, res, next) {
   next(createError(404));
 });
