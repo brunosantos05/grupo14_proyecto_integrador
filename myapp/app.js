@@ -31,10 +31,10 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Middleware global para mantener sesión desde cookie y pasar userLogged a views
+// Middleware global para mantener sesión y pasar user a las vistas
 app.use(function (req, res, next) {
   if (req.session.userLogged) {
-    res.locals.userLogged = req.session.userLogged;
+    res.locals.user = req.session.userLogged;
     return next();
   }
 
@@ -48,16 +48,19 @@ app.use(function (req, res, next) {
             email: user.email,
             fotoPerfil: user.fotoPerfil,
           };
-          res.locals.userLogged = req.session.userLogged;
+          res.locals.user = req.session.userLogged;
+        } else {
+          res.locals.user = null;
         }
         return next();
       })
       .catch(function(err) {
         console.error("Error al recuperar usuario desde cookie:", err);
+        res.locals.user = null;
         return next();
       });
   } else {
-    res.locals.userLogged = null;
+    res.locals.user = null;
     return next();
   }
 });

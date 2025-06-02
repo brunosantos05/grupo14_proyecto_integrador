@@ -38,13 +38,13 @@
         <ul class="left-navbar">
           <li><a href="/">Todos los productos</a></li>
 
-          <% if (userLogged) { %>
+          <% if (user) { %>
             <li><a href="/products/create">Cargar productos</a></li>
           <% } %>
         </ul>
 
         <ul class="right-navbar">
-          <% if (userLogged) { %>
+          <% if (user) { %>
             <li>
               Hola, <%= userLogged.usuario %> <i class="fas fa-user"></i>
             </li>

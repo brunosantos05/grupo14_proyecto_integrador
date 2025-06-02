@@ -85,23 +85,25 @@ const userController = {
   },
 
   profile: function(req, res) {
-    const usuario = req.session.userLogged;
-    if (!usuario) {
-      return res.redirect('/users/login');
-    }
+  console.log(req.session);
+  const usuario = req.session.userLogged;
+  if (!usuario) {
+    return res.redirect('/');
+  }
 
-    db.Producto.findAll()  // Asegúrate que el modelo correcto es Producto, no Product
-      .then(function(productos) {
-        res.render('profile', { user: usuario, productos: productos });
-      })
-      .catch(function(error) {
-        res.send("Error al cargar productos: " + error);
-      });
-  },
+  db.Producto.findAll()
+    .then(function(productos) {
+      res.render('profile', { user: usuario, productos: productos });
+    })
+    .catch(function(error) {
+      res.send("Error al cargar productos: " + error);
+    });
+},
+
 
   logout: function(req, res) {
     req.session.destroy();
-    res.redirect('/');
+    res.redirect('/users/login');
   }
 };
 
