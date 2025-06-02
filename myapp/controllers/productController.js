@@ -4,17 +4,17 @@ const op = db.Sequelize.Op;
 const Product = db.Product;
 
 
-const productoController = {
+const productController = {
   detalle: function (req,res) {
     let id = req.params.id
-    db.Product.findByPK(id,{
+    db.Producto.findByPk(id,{
       include: [
         { association: "user" },
         { association: "comentarios"},
       ]
     })
     .then(data => {
-      db.comentarios.findAll({
+      db.Comentario.findAll({
         where: { producto_id: data.id},
         include: [
           { association: "user"}
@@ -31,4 +31,4 @@ const productoController = {
   };
 
 
-module.exports = productoController;
+module.exports = productController;
