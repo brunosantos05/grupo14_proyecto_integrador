@@ -38,9 +38,9 @@ module.exports = function (sequelize, dataTypes) {
             as: "producto"
         });
 
-        Comentario.belongsTo(models.Usuario, {
+        Comentario.belongsTo(models.User, {
             foreignKey: "usuario_id",
-            as: "usuario"
+            as: "user"
         });
     };
 

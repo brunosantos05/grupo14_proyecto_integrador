@@ -1,63 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="./images/Nani.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./images/Nani.png" />
+  <title>CAMISETAS NANI</title>
 
-	<title> CAMISETAS NANI</title>
-	<!-- Font Awesome Stylesheet -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-	<!-- Bootstrap Grid Stylesheet -->
-	<link rel="stylesheet" href="/stylesheets/css/app.css">
-	<link rel="stylesheet" href="/stylesheets/css/app.css">
-	<link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
-	<!-- Own Stylesheet -->
-	<link rel="stylesheet" href="/stylesheets/app.css">
+  <!-- Font Awesome Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+  <!-- Bootstrap Grid Stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/css/app.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap-grid.min.css">
+  <!-- Own Stylesheet -->
+  <link rel="stylesheet" href="/stylesheets/app.css">
 </head>
 
 <body>
-	<!-- Header -->
-	<%- include('partials/header') %>
-	<!-- /Header -->
 
-	<!-- Novedades -->
-	<div class="container products-wrapper">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="products-title">Registrate</h2>
-			</div>
-			<!-- Show the "ultimos" products -->
-			<h2 class="col-12"> <form action="/register" method="post">
-				<label for="email">Email:</label>
-				<input type="email" name="email" id="email" required><br>
-			  
-				<label for="usuario">Usuario:</label>
-				<input type="text" name="usuario" id="usuario" required><br>
-			  
-				<label for="password">Contraseña:</label>
-				<input type="password" name="password" id="password" required><br>
-			  
-				<label for="fecha">Fecha de nacimiento:</label>
-				<input type="date" name="fecha" id="fecha" required><br>
-			  
-				<label for="documento">N° de documento:</label>
-				<input type="number" name="documento" id="documento" required><br>
-			  
-				<label for="foto">Foto de perfil (URL):</label>
-				<input type="text" name="foto" id="foto"><br>
-			  
-				<button type="submit">Registrarme</button>
-			  </form>
-			  
-			</h2>
+  <!-- Header -->
+  <%- include('partials/header') %>
+  <!-- /Header -->
 
+  <!-- Registro -->
+  <div class="container products-wrapper">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="products-title">Registrate</h2>
+      </div>
 
-	<!-- footer -->
-	<%- include('partials/footer') %>
-	<!-- /footer -->
+      <!-- Mostrar errores si hay -->
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="col-12">
+          <ul>
+            <% errors.forEach(function(error) { %>
+              <li><%= error %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% } %>
+
+      <!-- Formulario -->
+      <div class="col-12">
+        <form action="/users/register" method="post">
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required><br>
+          </div>
+
+          <div>
+            <label for="usuario">Usuario:</label>
+            <input type="text" name="usuario" id="usuario" required><br>
+          </div>
+
+          <div>
+            <label for="password">Contraseña:</label>
+            <input type="password" name="password" id="password" required><br>
+          </div>
+
+          <div>
+            <label for="fecha">Fecha de nacimiento:</label>
+            <input type="date" name="fecha" id="fecha" required><br>
+          </div>
+
+          <div>
+            <label for="documento">N° de documento:</label>
+            <input type="number" name="documento" id="documento" required><br>
+          </div>
+
+          <div>
+            <label for="foto">Foto de perfil (URL):</label>
+            <input type="text" name="foto" id="foto"><br>
+          </div>
+
+          <button type="submit">Registrarme</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+  <!-- /Footer -->
+
 </body>
 
 </html>
