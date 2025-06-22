@@ -17,17 +17,15 @@ const busquedaControllers = {
       include: [
         { association: "user" },
         { association: "comentarios" }
-      ]
-    })
-      .then((data) => {
-        return res.render("search-results", { productos: data });
-      })
-
-      .catch(function (e) {
-        console.log(e);
-  });
-},
-}
-
+      ]
+    })
+    .then(function (data) {
+      return res.render("search-results", { productos: data });
+    })
+    .catch(function (e) {
+      console.log(e);
+    });
+  }
+};
 
 module.exports = busquedaControllers;
